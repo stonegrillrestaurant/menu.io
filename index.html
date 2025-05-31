@@ -1,5 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>Stone Grill</title></head>
-<body><h1>Welcome to Stone Grill</h1></body>
+<html>
+<head>
+  <title>Welcome to Our Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <h1>Welcome to Our Page</h1>
+  <div id="fb-root"></div>
+
+  <div class="fb-login-button" 
+       data-width="" 
+       data-size="large" 
+       data-button-type="login_with" 
+       data-layout="default" 
+       data-auto-logout-link="false" 
+       data-use-continue-as="false" 
+       data-scope="public_profile,email"
+       onlogin="checkLoginState();">
+  </div>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1043497450560748',
+        cookie: true,
+        xfbml: true,
+        version: 'v19.0'
+      });
+
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
+
+    function checkLoginState() {
+      FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+          window.location.href = "login-success.html";
+        } else {
+          alert("Facebook login failed.");
+        }
+      });
+    }
+  </script>
+</body>
 </html>
